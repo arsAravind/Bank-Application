@@ -27,4 +27,6 @@ public interface Service {
 
 	List<UserAccount> fetchAll();
 
+	List<UserAccount> salary(long accountBalance);
+
 }

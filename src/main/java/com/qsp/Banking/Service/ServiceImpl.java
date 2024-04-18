@@ -77,12 +77,12 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public String balance(int id) throws AccountNumberNotFoundException {
-		UserAccount acc = repo.findByAccountNumber(id);
-		if (acc != null) {
+		UserAccount acc = repo.findById(id).orElseThrow(() -> new AccountNumberNotFoundException());
+		
 			return "Balance amount is " + acc.getAccountBalance();
-		} else {
-			throw new AccountNumberNotFoundException();
-		}
+//		} else {
+//			throw new AccountNumberNotFoundException();
+//		}
 	}
 
 	@Override
@@ -118,6 +118,12 @@ public class ServiceImpl implements Service {
 	public List<UserAccount> fetchAll() {
 		List<UserAccount> findAll = repo.findAll();
 		return findAll;
+	}
+
+	@Override
+	public List<UserAccount> salary(long accountBalance) {
+		List<UserAccount> list=repo.findAllSalary(accountBalance);
+		return list;
 	}
 
 }
